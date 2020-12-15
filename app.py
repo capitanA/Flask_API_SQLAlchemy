@@ -29,9 +29,6 @@ def customized_resoponse_handler(access_token, identity):
                     "user_id": identity.id})
 
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
 
 
 @jwt.jwt_error_handler
