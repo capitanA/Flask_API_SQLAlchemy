@@ -7,5 +7,4 @@ Werkzeug==1.0.1
 Flask-RESTful
 Flask-JWT
 Flask-SQLAlchemy
-Uwsgi
 
