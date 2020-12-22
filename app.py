@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from flask_restful import Api
 from security import authenticate, identity as identity_function
@@ -9,7 +10,7 @@ from datetime import timedelta
 from db import db
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL","sqlite:///data.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['JWT_AUTH_URL_RULE'] = '/login'
@@ -27,8 +28,6 @@ jwt = JWT(app, authenticate, identity_function)
 def customized_resoponse_handler(access_token, identity):
     return jsonify({"access_token": access_token.decode('utf-8'),
                     "user_id": identity.id})
-
-
 
 
 @jwt.jwt_error_handler
